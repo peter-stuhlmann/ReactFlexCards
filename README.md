@@ -7,6 +7,34 @@
 
 ![Demo Screenshot](./demo-screenshot.png)
 
+## Minimal setup example
+
+```javascript
+const cards = [
+  {
+    img: {
+      src: 'http://example.com/example/img1.jpg',
+      alt: 'Lorem ipsum'
+    },
+    title: 'Lorem ipsum',
+    description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+    href: 'http://example.com'
+  },
+  {
+    img: {
+      src: 'http://example.com/example/img2.jpg',
+      alt: 'Lorem ipsum'
+    },
+    title: 'Lorem ipsum',
+    description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+    href: 'http://example.com'
+  },
+  ...
+];
+
+<FlexCards cards={cards} />;
+```
+
 ## Props
 
 With props you have a lot of possibilities to easily customize this module.
