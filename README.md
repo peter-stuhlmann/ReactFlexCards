@@ -5,7 +5,11 @@
 [![open issues](https://img.shields.io/github/issues/peter-stuhlmann/ReactFlexCards.svg)](https://github.com/peter-stuhlmann/ReactFlexCards/issues?q=is%3Aopen+is%3Aissue)
 [![closed issues](https://img.shields.io/github/issues-closed/peter-stuhlmann/ReactFlexCards.svg)](https://github.com/peter-stuhlmann/ReactFlexCards/issues?q=is%3Aissue+is%3Aclosed)
 
+![Demo Screenshot](./demo-screenshot.png)
+
 ## Props
+
+With props you have a lot of possibilities to easily customize this module.
 
 | prop             | type    | default     | notes                                                                             |
 | ---------------- | ------- | ----------- | --------------------------------------------------------------------------------- |
