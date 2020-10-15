@@ -21,7 +21,8 @@
 | mobileBreakpoint | string  | '480px'     | media breakpoint (mobile devices)                                                 |
 | tabletBreakpoint | string  | '768px'     | media breakpoint (tablet devices)                                                 |
 | margin           | string  | '8px'       | value will be used to calculate all margins/paddings in this component            |
-| width            | string  | '100%'      | width of the whole container; content is centered                                 |
+| width            | string  | '100%'      | width of the whole container; content is centered (may not be responsive)         |
+| maxWidth         | string  | '100%'      | max width of the whole container; content is centered                             |
 
 ---
 

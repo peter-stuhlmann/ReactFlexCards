@@ -16,6 +16,7 @@ export default function FlexCards(props) {
     padding,
     tabletBreakpoint,
     width,
+    maxWidth,
   } = props;
 
   return (
@@ -31,6 +32,7 @@ export default function FlexCards(props) {
       padding={padding}
       tabletBreakpoint={tabletBreakpoint}
       width={width}
+      maxWidth={maxWidth}
     >
       <ul>
         {cards.map((card, index) => (
@@ -66,6 +68,7 @@ const StyledFlexCards = styled.div`
     flex-flow: row wrap;
     padding: ${(props) => props.padding || '8px'};
     width: ${(props) => props.width || '100%'};
+    max-width: ${(props) => props.maxWidth || '100%'};
     margin: 0 auto;
 
     @media (max-width: ${(props) => props.tabletBreakpoint || '768px'}) {
