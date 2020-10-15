@@ -10,6 +10,7 @@ export default function FlexCards(props) {
     label,
     cards,
     noLabel,
+    noTextbox,
     mobileBreakpoint,
     padding,
     tabletBreakpoint,
@@ -24,6 +25,7 @@ export default function FlexCards(props) {
       containerColor={containerColor}
       mobileBreakpoint={mobileBreakpoint}
       noLabel={noLabel}
+      noTextbox={noTextbox}
       padding={padding}
       tabletBreakpoint={tabletBreakpoint}
       width={width}
@@ -139,8 +141,9 @@ const StyledFlexCards = styled.div`
         }
 
         img {
-          border-radius: 4px 4px 0 0;
-          margin-bottom: -4px;
+          border-radius: ${(props) =>
+            props.noTextbox ? '4px' : '4px 4px 0 0'};
+          margin-bottom: ${(props) => (props.noTextbox ? '0' : '-4px')};
           object-fit: cover;
           transition: 0.2s;
           height: 100%;
@@ -149,6 +152,7 @@ const StyledFlexCards = styled.div`
       }
 
       div:nth-child(2) {
+        display: ${(props) => (props.noTextbox ? 'none' : 'block')};
         padding: calc(${(props) => props.padding || '8px'} * 2);
 
         h3 {
