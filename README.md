@@ -17,6 +17,7 @@
 | label            | string  | 'Read more' | text that appears on the image when hovering over a card                          |
 | noLabel          | boolean | false       | `true` hides the label (text that appears on the image when hovering over a card) |
 | noTextbox        | boolean | false       | `true` hides the textbox below the picture                                        |
+| noImage          | boolean | false       | `true` hides the image above the text                                             |
 | mobileBreakpoint | string  | '480px'     | media breakpoint (mobile devices)                                                 |
 | tabletBreakpoint | string  | '768px'     | media breakpoint (tablet devices)                                                 |
 | margin           | string  | '8px'       | value will be used to calculate all margins/paddings in this component            |

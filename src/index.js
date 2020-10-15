@@ -9,6 +9,7 @@ export default function FlexCards(props) {
     containerColor,
     label,
     cards,
+    noImage,
     noLabel,
     noTextbox,
     mobileBreakpoint,
@@ -24,6 +25,7 @@ export default function FlexCards(props) {
       className={className}
       containerColor={containerColor}
       mobileBreakpoint={mobileBreakpoint}
+      noImage={noImage}
       noLabel={noLabel}
       noTextbox={noTextbox}
       padding={padding}
@@ -34,10 +36,12 @@ export default function FlexCards(props) {
         {cards.map((card, index) => (
           <li key={index}>
             <a href={card.href}>
-              <div>
-                <span>{label || 'Read more'}</span>
-                <img src={card.img.src} alt={card.img.alt || card.title} />
-              </div>
+              {!noImage ? (
+                <div>
+                  <span>{label || 'Read more'}</span>
+                  <img src={card.img.src} alt={card.img.alt || card.title} />
+                </div>
+              ) : null}
               <div>
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
@@ -118,6 +122,8 @@ const StyledFlexCards = styled.div`
       div:first-child {
         border-radius: 4px 4px 0 0;
         overflow: hidden;
+        ${(props) =>
+          props.noImage ? `padding: calc(${props.padding || '8px'} * 2)` : '0'};
         position: relative;
 
         span {
@@ -138,6 +144,10 @@ const StyledFlexCards = styled.div`
           visibility: hidden;
           opacity: 0;
           transition: visibility 0.2s, opacity 0.2s;
+        }
+
+        h3 {
+          font-size: 1.2em;
         }
 
         img {
