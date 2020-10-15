@@ -42,10 +42,12 @@ export default function FlexCards(props) {
                   <img src={card.img.src} alt={card.img.alt || card.title} />
                 </div>
               ) : null}
-              <div>
-                <h3>{card.title}</h3>
-                <p>{card.description}</p>
-              </div>
+              {!noTextbox ? (
+                <div>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </div>
+              ) : null}
             </a>
           </li>
         ))}
@@ -120,7 +122,7 @@ const StyledFlexCards = styled.div`
       }
 
       div:first-child {
-        border-radius: 4px 4px 0 0;
+        border-radius: ${(props) => (props.noTextbox ? '4px' : '4px 4px 0 0')};
         overflow: hidden;
         ${(props) =>
           props.noImage ? `padding: calc(${props.padding || '8px'} * 2)` : '0'};
@@ -162,7 +164,6 @@ const StyledFlexCards = styled.div`
       }
 
       div:nth-child(2) {
-        display: ${(props) => (props.noTextbox ? 'none' : 'block')};
         padding: calc(${(props) => props.padding || '8px'} * 2);
 
         h3 {
