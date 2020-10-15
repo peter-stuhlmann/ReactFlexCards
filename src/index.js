@@ -8,6 +8,7 @@ export default function FlexCards(props) {
     className,
     containerColor,
     label,
+    labelColor,
     cards,
     noImage,
     noLabel,
@@ -25,6 +26,7 @@ export default function FlexCards(props) {
       cardsPerRow={cardsPerRow}
       className={className}
       containerColor={containerColor}
+      labelColor={labelColor}
       mobileBreakpoint={mobileBreakpoint}
       noImage={noImage}
       noLabel={noLabel}
@@ -133,7 +135,8 @@ const StyledFlexCards = styled.div`
 
         span {
           display: ${(props) => (props.noLabel ? 'none' : 'inline-block')};
-          background-color: rgba(255, 255, 255, 0.9);
+          background-color: ${(props) =>
+            props.labelColor || 'rgba(255, 255, 255, 0.9)'};
           border-radius: 4px;
           box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
             0px 4px 5px 0px rgba(0, 0, 0, 0.14),
