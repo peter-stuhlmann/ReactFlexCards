@@ -50,7 +50,7 @@ With props you have a lot of possibilities to easily customize this module.
 | labelColor       | string  | 'rgba(255, 255, 255, 0.9)' | background color of the text that appears on the image when hovering over a card                          |
 | noLabel          | boolean | false                      | `true` hides the label (text that appears on the image when hovering over a card)                         |
 | noTextbox        | boolean | false                      | `true` hides the textbox below the picture                                                                |
-| noImage          | boolean | false                      | `true` hides the image above the text                                                                     |
+| noMedia          | boolean | false                      | `true` hides the image or iframe above the text                                                           |
 | mediaPriority    | string  | 'image'                    | if both img and iframe are specified in the data object, the mediaPriority value is shown. (image/iframe) |
 | mobileBreakpoint | string  | '480px'                    | media breakpoint (mobile devices)                                                                         |
 | tabletBreakpoint | string  | '768px'                    | media breakpoint (tablet devices)                                                                         |
