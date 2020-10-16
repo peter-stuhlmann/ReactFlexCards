@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export default function FlexCards(props) {
   const {
@@ -97,6 +98,20 @@ export default function FlexCards(props) {
     return null;
   };
 
+  const createCardContent = (card) => {
+    return (
+      <Fragment>
+        {!noMedia ? showMedia(card) : null}
+        {!noTextbox ? (
+          <div>
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </div>
+        ) : null}
+      </Fragment>
+    );
+  };
+
   return (
     <StyledFlexCards
       cardColor={cardColor}
@@ -118,15 +133,12 @@ export default function FlexCards(props) {
         {cards.map((card, index) => {
           return (
             <li key={index}>
-              <a href={card.href}>
-                {!noMedia ? showMedia(card) : null}
-                {!noTextbox ? (
-                  <div>
-                    <h3>{card.title}</h3>
-                    <p>{card.description}</p>
-                  </div>
-                ) : null}
-              </a>
+              {card.href.startsWith('http://') ||
+              card.href.startsWith('https://') ? (
+                <a href={card.href}>{createCardContent(card)}</a>
+              ) : (
+                <Link to={card.href}>{createCardContent(card)}</Link>
+              )}
             </li>
           );
         })}
