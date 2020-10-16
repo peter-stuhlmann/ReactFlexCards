@@ -18,13 +18,12 @@ export default function FlexCards(props) {
     tabletBreakpoint,
     width,
     maxWidth,
+    mediaPriority,
   } = props;
 
-  let media;
-
   const showMedia = (card) => {
-    if (card.iframe) {
-      media = (
+    if (card.iframe && props.mediaPriority === 'iframe') {
+      return (
         <iframe
           title={card.iframe.src}
           width="100%"
@@ -36,8 +35,8 @@ export default function FlexCards(props) {
       );
     }
 
-    if (card.img) {
-      media = (
+    if (card.img && props.mediaPriority === 'image') {
+      return (
         <div>
           <span>{label || 'Read more'}</span>
           <img src={card.img.src} alt={card.img.alt || card.title} />
@@ -45,7 +44,29 @@ export default function FlexCards(props) {
       );
     }
 
-    return media;
+    if (card.img) {
+      return (
+        <div>
+          <span>{label || 'Read more'}</span>
+          <img src={card.img.src} alt={card.img.alt || card.title} />
+        </div>
+      );
+    }
+
+    if (card.iframe) {
+      return (
+        <iframe
+          title={card.iframe.src}
+          width="100%"
+          src={card.iframe.src}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      );
+    }
+
+    return null;
   };
 
   return (
@@ -63,6 +84,7 @@ export default function FlexCards(props) {
       tabletBreakpoint={tabletBreakpoint}
       width={width}
       maxWidth={maxWidth}
+      mediaPriority={mediaPriority}
     >
       <ul>
         {cards.map((card, index) => {
