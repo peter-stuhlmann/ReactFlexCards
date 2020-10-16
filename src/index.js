@@ -43,7 +43,11 @@ export default function FlexCards(props) {
               {!noImage ? (
                 <div>
                   <span>{label || 'Read more'}</span>
-                  <img src={card.img.src} alt={card.img.alt || card.title} />
+                  <img
+                    src={card.img.src}
+                    loading="lazy"
+                    alt={card.img.alt || card.title}
+                  />
                 </div>
               ) : null}
               {!noTextbox ? (
