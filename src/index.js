@@ -20,6 +20,34 @@ export default function FlexCards(props) {
     maxWidth,
   } = props;
 
+  let media;
+
+  const showMedia = (card) => {
+    if (card.iframe) {
+      media = (
+        <iframe
+          title={card.iframe.src}
+          width="100%"
+          src={card.iframe.src}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      );
+    }
+
+    if (card.img) {
+      media = (
+        <div>
+          <span>{label || 'Read more'}</span>
+          <img src={card.img.src} alt={card.img.alt || card.title} />
+        </div>
+      );
+    }
+
+    return media;
+  };
+
   return (
     <StyledFlexCards
       cardColor={cardColor}
@@ -37,28 +65,21 @@ export default function FlexCards(props) {
       maxWidth={maxWidth}
     >
       <ul>
-        {cards.map((card, index) => (
-          <li key={index}>
-            <a href={card.href}>
-              {!noImage ? (
-                <div>
-                  <span>{label || 'Read more'}</span>
-                  <img
-                    src={card.img.src}
-                    loading="lazy"
-                    alt={card.img.alt || card.title}
-                  />
-                </div>
-              ) : null}
-              {!noTextbox ? (
-                <div>
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                </div>
-              ) : null}
-            </a>
-          </li>
-        ))}
+        {cards.map((card, index) => {
+          return (
+            <li key={index}>
+              <a href={card.href}>
+                {showMedia(card)}
+                {!noTextbox ? (
+                  <div>
+                    <h3>{card.title}</h3>
+                    <p>{card.description}</p>
+                  </div>
+                ) : null}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </StyledFlexCards>
   );
