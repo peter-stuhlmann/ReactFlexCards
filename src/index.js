@@ -24,14 +24,16 @@ export default function FlexCards(props) {
   const showMedia = (card) => {
     if (card.iframe && props.mediaPriority === 'iframe') {
       return (
-        <iframe
-          title={card.iframe.src}
-          width="100%"
-          src={card.iframe.src}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <div>
+          <iframe
+            title={card.iframe.src}
+            width="100%"
+            src={card.iframe.src}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
       );
     }
 
@@ -55,14 +57,16 @@ export default function FlexCards(props) {
 
     if (card.iframe) {
       return (
-        <iframe
-          title={card.iframe.src}
-          width="100%"
-          src={card.iframe.src}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <div>
+          <iframe
+            title={card.iframe.src}
+            width="100%"
+            src={card.iframe.src}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
       );
     }
 
@@ -205,7 +209,8 @@ const StyledFlexCards = styled.div`
           font-size: 1.2em;
         }
 
-        img {
+        img,
+        iframe {
           border-radius: ${(props) =>
             props.noTextbox ? '4px' : '4px 4px 0 0'};
           margin-bottom: ${(props) => (props.noTextbox ? '0' : '-4px')};
