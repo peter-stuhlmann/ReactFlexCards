@@ -41,7 +41,7 @@ const cards = [
 <FlexCards cards={cards} />;
 ```
 
-You can also show iFrames instead of images. This is useful e.g. for YouTube videos. To do this, write the following iFrame object instead of your img object in your data array:
+You can also show iFrames (useful e.g. for YouTube videos) or videos (.mp4 or .ogg) instead of images. To do this, write the following iframe or video object instead of your img object in your data array:
 
 ```javascript
   {
@@ -52,15 +52,29 @@ You can also show iFrames instead of images. This is useful e.g. for YouTube vid
   }
 ```
 
-If you enter both img and iframe, the image will be shown by default. You can override that behaviour with the prop `mediaPriority`.
-
 ```javascript
-<FlexCards cards={cards} mediaPriority="iframe" />
+  {
+    video: {
+      src: {
+        mp4: 'video.mp4',
+        ogg: 'video.ogg'
+      }
+    },
+    ...
+  }
 ```
 
-If the `mediaPriority` is set to _iframe_ the iFrame will be shown even if there is an image. If there is no iFrame available, the image will still be shown.  
-With the prop `noMedia` you can hide images and iFrames. This will override the `mediaPriority` prop.  
-With the prop `noTextbox` you can hide the text box below the image or the iFrame.
+<!-- If you enter both img and iframe, the image will be shown by default. You can override that behaviour with the prop `mediaPriority`. -->
+
+If you enter more than one media object (img, iframe, video), the image will be shown by default. If no image is available default will be iFrame. You can override this behaviour with the prop `mediaPriority`.
+
+```javascript
+<FlexCards cards={cards} mediaPriority="video" />
+```
+
+If the `mediaPriority` is set e.g. to video the video will be shown even if there is an image or an iFrame. If there is no video available, the image or the iFrame will still be shown.  
+With the prop `noMedia` you can hide images, iFrames and videos. This will override the `mediaPriority` prop.  
+With the prop `noTextbox` you can hide the text box below the media box.
 
 ## Props
 
@@ -78,7 +92,7 @@ With props you have a lot of possibilities to easily customize this module.
 | noLabel          | boolean | false                      | `true` hides the label                                                                                                                            |
 | noTextbox        | boolean | false                      | `true` hides the textbox below the picture                                                                                                        |
 | noMedia          | boolean | false                      | `true` hides the image or iframe above the text                                                                                                   |
-| mediaPriority    | string  | 'image'                    | if both img and iframe are specified in the data object, the value specified in mediaPriority is shown. (image/iframe)                            |
+| mediaPriority    | string  | 'image'                    | if both img and iframe are specified in the data object, the value specified in mediaPriority is shown. (image/iframe/video)                      |
 | mobileBreakpoint | string  | '480px'                    | media breakpoint (mobile devices)                                                                                                                 |
 | tabletBreakpoint | string  | '768px'                    | media breakpoint (tablet devices)                                                                                                                 |
 | margin           | string  | '8px'                      | value will be used to calculate all margins/paddings in this component                                                                            |

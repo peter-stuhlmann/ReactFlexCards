@@ -37,6 +37,18 @@ export default function FlexCards(props) {
       );
     }
 
+    if (card.video && props.mediaPriority === 'video') {
+      return (
+        <div>
+          <video controls>
+            <source src={card.video.src.mp4} type="video/mp4" />
+            <source src={card.video.src.ogg} type="video/ogg" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      );
+    }
+
     if (card.img && props.mediaPriority === 'image') {
       return (
         <div>
@@ -66,6 +78,18 @@ export default function FlexCards(props) {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
+        </div>
+      );
+    }
+
+    if (card.video) {
+      return (
+        <div>
+          <video controls>
+            <source src={card.video.src.mp4} type="video/mp4" />
+            <source src={card.video.src.ogg} type="video/ogg" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       );
     }
@@ -210,7 +234,8 @@ const StyledFlexCards = styled.div`
         }
 
         img,
-        iframe {
+        iframe,
+        video {
           border-radius: ${(props) =>
             props.noTextbox ? '4px' : '4px 4px 0 0'};
           margin-bottom: ${(props) => (props.noTextbox ? '0' : '-4px')};
