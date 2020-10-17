@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export default function FlexCards(props) {
   const {
@@ -10,15 +11,107 @@ export default function FlexCards(props) {
     label,
     labelColor,
     cards,
-    noImage,
+    noMedia,
     noLabel,
+    noLink,
     noTextbox,
     mobileBreakpoint,
     padding,
     tabletBreakpoint,
     width,
     maxWidth,
+    mediaPriority,
   } = props;
+
+  const showMedia = (card) => {
+    if (card.iframe && props.mediaPriority === 'iframe') {
+      return (
+        <div>
+          <iframe
+            title={card.iframe.src}
+            width="100%"
+            src={card.iframe.src}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      );
+    }
+
+    if (card.video && props.mediaPriority === 'video') {
+      return (
+        <div>
+          <video controls>
+            <source src={card.video.src.mp4} type="video/mp4" />
+            <source src={card.video.src.ogg} type="video/ogg" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      );
+    }
+
+    if (card.img && props.mediaPriority === 'image') {
+      return (
+        <div>
+          <span>{label || 'Read more'}</span>
+          <img src={card.img.src} alt={card.img.alt || card.title} />
+        </div>
+      );
+    }
+
+    if (card.img) {
+      return (
+        <div>
+          <span>{label || 'Read more'}</span>
+          <img src={card.img.src} alt={card.img.alt || card.title} />
+        </div>
+      );
+    }
+
+    if (card.iframe) {
+      return (
+        <div>
+          <iframe
+            title={card.iframe.src}
+            width="100%"
+            src={card.iframe.src}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      );
+    }
+
+    if (card.video) {
+      return (
+        <div>
+          <video controls>
+            <source src={card.video.src.mp4} type="video/mp4" />
+            <source src={card.video.src.ogg} type="video/ogg" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  const createCardContent = (card) => {
+    return (
+      <Fragment>
+        {!noMedia ? showMedia(card) : null}
+        {!noTextbox ? (
+          <div>
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </div>
+        ) : null}
+      </Fragment>
+    );
+  };
 
   return (
     <StyledFlexCards
@@ -28,33 +121,33 @@ export default function FlexCards(props) {
       containerColor={containerColor}
       labelColor={labelColor}
       mobileBreakpoint={mobileBreakpoint}
-      noImage={noImage}
+      noMedia={noMedia}
       noLabel={noLabel}
+      noLink={noLink}
       noTextbox={noTextbox}
       padding={padding}
       tabletBreakpoint={tabletBreakpoint}
       width={width}
       maxWidth={maxWidth}
+      mediaPriority={mediaPriority}
     >
       <ul>
-        {cards.map((card, index) => (
-          <li key={index}>
-            <a href={card.href}>
-              {!noImage ? (
-                <div>
-                  <span>{label || 'Read more'}</span>
-                  <img src={card.img.src} alt={card.img.alt || card.title} />
-                </div>
-              ) : null}
-              {!noTextbox ? (
-                <div>
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                </div>
-              ) : null}
-            </a>
-          </li>
-        ))}
+        {cards.map((card, index) => {
+          return (
+            <li key={index}>
+              {!noLink ? (
+                card.href.startsWith('http://') ||
+                card.href.startsWith('https://') ? (
+                  <a href={card.href}>{createCardContent(card)}</a>
+                ) : (
+                  <Link to={card.href}>{createCardContent(card)}</Link>
+                )
+              ) : (
+                createCardContent(card)
+              )}
+            </li>
+          );
+        })}
       </ul>
     </StyledFlexCards>
   );
@@ -130,7 +223,7 @@ const StyledFlexCards = styled.div`
         border-radius: ${(props) => (props.noTextbox ? '4px' : '4px 4px 0 0')};
         overflow: hidden;
         ${(props) =>
-          props.noImage ? `padding: calc(${props.padding || '8px'} * 2)` : '0'};
+          props.noMedia ? `padding: calc(${props.padding || '8px'} * 2)` : '0'};
         position: relative;
 
         span {
@@ -158,7 +251,9 @@ const StyledFlexCards = styled.div`
           font-size: 1.2em;
         }
 
-        img {
+        img,
+        iframe,
+        video {
           border-radius: ${(props) =>
             props.noTextbox ? '4px' : '4px 4px 0 0'};
           margin-bottom: ${(props) => (props.noTextbox ? '0' : '-4px')};
