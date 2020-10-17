@@ -13,6 +13,7 @@ export default function FlexCards(props) {
     cards,
     noMedia,
     noLabel,
+    noLink,
     noTextbox,
     mobileBreakpoint,
     padding,
@@ -122,6 +123,7 @@ export default function FlexCards(props) {
       mobileBreakpoint={mobileBreakpoint}
       noMedia={noMedia}
       noLabel={noLabel}
+      noLink={noLink}
       noTextbox={noTextbox}
       padding={padding}
       tabletBreakpoint={tabletBreakpoint}
@@ -133,11 +135,15 @@ export default function FlexCards(props) {
         {cards.map((card, index) => {
           return (
             <li key={index}>
-              {card.href.startsWith('http://') ||
-              card.href.startsWith('https://') ? (
-                <a href={card.href}>{createCardContent(card)}</a>
+              {!noLink ? (
+                card.href.startsWith('http://') ||
+                card.href.startsWith('https://') ? (
+                  <a href={card.href}>{createCardContent(card)}</a>
+                ) : (
+                  <Link to={card.href}>{createCardContent(card)}</Link>
+                )
               ) : (
-                <Link to={card.href}>{createCardContent(card)}</Link>
+                createCardContent(card)
               )}
             </li>
           );

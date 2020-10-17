@@ -90,6 +90,7 @@ With props you have a lot of possibilities to easily customize this module.
 | label            | string  | 'Read more'                | text that appears on the image when hovering over a card                                                                                          |
 | labelColor       | string  | 'rgba(255, 255, 255, 0.9)' | background color of the label                                                                                                                     |
 | noLabel          | boolean | false                      | `true` hides the label                                                                                                                            |
+| noLink           | boolean | false                      | `true` removes the anchor tag or Link component from the card                                                                                     |
 | noTextbox        | boolean | false                      | `true` hides the textbox below the picture                                                                                                        |
 | noMedia          | boolean | false                      | `true` hides the image or iframe above the text                                                                                                   |
 | mediaPriority    | string  | 'image'                    | if both img and iframe are specified in the data object, the value specified in mediaPriority is shown. (image/iframe/video)                      |
